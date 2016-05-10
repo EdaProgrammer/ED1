@@ -1,0 +1,35 @@
+void ordena(lista *pl){
+	no_Lista *proximo = *pl;
+	no_Lista *atual = *pl;
+	no_Lista *aux = *pl;
+	no_Lista *auxAtual;
+	no_Lista *auxProx;
+
+	proximo = proximo->prox;
+	while (atual->prox != NULL){
+		while (proximo->prox != NULL){
+			if (atual->item > proximo->item){
+				auxAtual = atual;
+				auxProx = proximo;
+				auxAtual->prox = auxProx->prox;
+				aux->prox = auxProx;
+				auxProx->prox = auxAtual;
+				//atual->prox = proximo->prox;
+				//aux->prox = proximo;
+				//proximo->prox = atual;
+				//proximo = atual;
+			}
+		proximo = proximo->prox;
+		}
+		if (proximo->prox == NULL && atual->item > proximo->item){
+			auxAtual = atual;
+			auxProx = proximo;
+			auxAtual->prox = auxProx->prox;
+			aux->prox = auxProx;
+			auxProx->prox = auxAtual;
+		}
+		aux = atual;
+		atual = atual->prox;
+		proximo = atual->prox;
+	}
+}
