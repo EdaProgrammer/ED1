@@ -88,7 +88,7 @@ int main(){
 
 			default :
 				push(&stack, pos[i]);
-		}
+		}m
 	}
 	result = pop(&stack) - '0';
 
