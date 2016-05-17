@@ -35,7 +35,7 @@ elem_t_pilha pop(Pilha *p_l){
 	elem_t_pilha ret;
 	// o usuario da pilha deveria testar se a pilha nao esta vazia antes da chamada desta funcao
 	if (PilhaVazia(p_l))
-		return '\0';
+		return ret;
 	topo = p_l->prox;
 	p_l->prox = topo->prox;
 	ret = topo->info;
@@ -45,8 +45,9 @@ elem_t_pilha pop(Pilha *p_l){
 
 /* Retorna o elemento do topo da pilha */
 elem_t_pilha elemTopo(Pilha *p_l){
+	elem_t_pilha nulo;
 	if (PilhaVazia(p_l))
-		return '\0';
+		return nulo;
 	return p_l->prox->info;
 }
 
@@ -68,9 +69,9 @@ void liberaPilha(Pilha *p_l){
 void exibe(Pilha *p_l){
 	p_l = p_l->prox; 
 	while(p_l != NULL){
-		printf("%c ", p_l->info);
+		printf("%d %d \n", p_l->info.x, p_l->info.y);
 		p_l = p_l->prox;
 	}
-	printf("\n");
+	printf("acabou\n");
 }
 

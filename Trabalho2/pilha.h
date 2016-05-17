@@ -5,7 +5,9 @@
 #ifndef PILHA_H
 #define PILHA_H
 
-typedef char elem_t_pilha;
+typedef struct coord{
+	int x, y;
+} elem_t_pilha;
 
 typedef struct noPilha{
   elem_t_pilha info;
