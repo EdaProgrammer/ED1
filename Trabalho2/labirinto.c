@@ -55,9 +55,11 @@ void exibeLabirinto(Labirinto *l){
 }
 
 Fila* percorre(Labirinto *l){
-	int i, j, flag = 0, count = 0, aux = 0;
+	int i, j, flag = 0, count = 0, aux = 0, premios = 0;
 	elem_t_pilha coord;
 	Pilha p;
+
+	inicPilha(&p);
 
 	for (i = 0; i < linhas && flag == 0; ++i)
 		for (j = 0; j < colunas && flag == 0; ++j)
@@ -69,18 +71,14 @@ Fila* percorre(Labirinto *l){
 	l->p[i][j].visitado = 1;
 	do{
 
-		if (l->p[i][j - 1].tipo != 'x' && l->p[i][j - 1].tipo != 'b' && l->p[i][j - 1].visitado != 1){
+		if (l->p[i][j - 1].tipo != 'x' && l->p[i][j - 1].tipo != 'b' && l->p[i][j - 1].visitado == 0)
 			count++;
-		}
-		if (l->p[i][j + 1].tipo != 'x' && l->p[i][j + 1].tipo != 'b' && l->p[i][j + 1].visitado != 1){
+		if (l->p[i][j + 1].tipo != 'x' && l->p[i][j + 1].tipo != 'b' && l->p[i][j + 1].visitado == 0)
 			count++;	
-		}
-		if (l->p[i - 1][j].tipo != 'x' && l->p[i - 1][j].tipo != 'b' && l->p[i - 1][j].visitado != 1){
+		if (l->p[i - 1][j].tipo != 'x' && l->p[i - 1][j].tipo != 'b' && l->p[i - 1][j].visitado == 0)
 			count++;
-		}
-		if (l->p[i + 1][j].tipo != 'x' && l->p[i + 1][j].tipo != 'b' && l->p[i + 1][j].visitado != 1){
+		if (l->p[i + 1][j].tipo != 'x' && l->p[i + 1][j].tipo != 'b' && l->p[i + 1][j].visitado == 0)
 			count++;
-		}
 
 		if (count > 1){
 			coord.x = i;
@@ -90,35 +88,40 @@ Fila* percorre(Labirinto *l){
 
 		count = 0;
 
-		if (l->p[i][j - 1].tipo != 'x' && l->p[i][j - 1].tipo != 'b' && l->p[i][j - 1].visitado != 1){
+		if (l->p[i][j - 1].tipo != 'x' && l->p[i][j - 1].tipo != 'b' && l->p[i][j - 1].visitado == 0){
 			j--;
-			l->p[i][j].visitado = 1;
-		}else if (l->p[i][j + 1].tipo != 'x' && l->p[i][j + 1].tipo != 'b' && l->p[i][j + 1].visitado != 1){
+		}else if (l->p[i][j + 1].tipo != 'x' && l->p[i][j + 1].tipo != 'b' && l->p[i][j + 1].visitado == 0){
 			j++;
-			l->p[i][j].visitado = 1;
-		}else if (l->p[i - 1][j].tipo != 'x' && l->p[i - 1][j].tipo != 'b' && l->p[i - 1][j].visitado != 1){
+		}else if (l->p[i - 1][j].tipo != 'x' && l->p[i - 1][j].tipo != 'b' && l->p[i - 1][j].visitado == 0){
 			i--;
-			l->p[i][j].visitado = 1;
-		}else if (l->p[i + 1][j].tipo != 'x' && l->p[i + 1][j].tipo != 'b' && l->p[i + 1][j].visitado != 1){
+		}else if (l->p[i + 1][j].tipo != 'x' && l->p[i + 1][j].tipo != 'b' && l->p[i + 1][j].visitado == 0){
 			i++;
-			l->p[i][j].visitado = 1;
 		}else{
 			coord = pop(&p);
 			i = coord.x;
 			j = coord.y;
-			exibe(&p);
-			if (PilhaVazia(&p)){
-				printf("saiuu\n");
+			if (PilhaVazia(&p))
 				break;
-			}
 		}
 
-		//if (l->p[i][j].tipo == 'p')
-			//printf("(%d , %d)\n", i, j);
+		l->p[i][j].visitado++;
 
-		//printf("%d %d\n", i, j);
-		aux++;
+		if (l->p[i][j].tipo == 'p' && l->p[i][j].visitado == 1){
+			printf("(%d,%d) ", i, j);
+			premios++;
+		}
 		
-	}while (aux != 200);
+	}while (1);
+
+	printf("\nPremios encontrados: %d\n", premios);
+	premios = 0;
+
+	for (i = 0; i < linhas; ++i)
+		for (j = 0; j < colunas; ++j)
+			if (l->p[i][j].tipo == 'p')
+				premios++;
+
+	printf("Total de premios no labirinto: %d\n", premios);
+				
 	
 }

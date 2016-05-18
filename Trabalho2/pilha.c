@@ -72,6 +72,5 @@ void exibe(Pilha *p_l){
 		printf("%d %d \n", p_l->info.x, p_l->info.y);
 		p_l = p_l->prox;
 	}
-	printf("acabou\n");
 }
 

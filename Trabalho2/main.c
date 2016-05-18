@@ -6,7 +6,7 @@ int main(){
 	Labirinto l;
 
 	inicLabirinto(&l, url);
-	exibeLabirinto(&l);
+	//exibeLabirinto(&l);
 	percorre(&l);
 
 	return 0;
