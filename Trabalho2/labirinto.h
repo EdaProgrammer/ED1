@@ -12,11 +12,9 @@ typedef struct labirinto {
 } Labirinto;
 
 
-int inicLabirinto(Labirinto *l, char *arquivo); // Retorna 1 se iniciar com sucesso
+void exibeLabirinto(Labirinto *l, int linhas, int colunas);
 
-void exibeLabirinto(Labirinto *l);
-
-Fila* percorre(Labirinto *l); // Retorna 1 se o vetor estiver cheio e 0 caso contrario
+Fila percorre(Labirinto *l, int linhas, int colunas); // Retorna 1 se o vetor estiver cheio e 0 caso contrario
 
 
 #endif
